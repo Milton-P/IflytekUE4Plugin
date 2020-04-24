@@ -1,0 +1,14 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.asr.cpp.obj": [
+			"asr.cpp.obj",
+			"AsrDelegate.cpp.obj",
+			"JNIFunction.cpp.obj"
+		],
+		"Module.asr.gen.cpp.obj": [
+			"asr.init.gen.cpp.obj",
+			"AsrDelegate.gen.cpp.obj"
+		]
+	}
+}

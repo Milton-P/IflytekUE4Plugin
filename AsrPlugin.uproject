@@ -1,0 +1,16 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{CFB41ED5-4C14-3F04-CEF3-8C9709FAEFE5}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "AsrPlugin",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	]
+}

@@ -1,0 +1,14 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-asr-0002.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\harix-ue4-engine\UnrealEngine-4.23.0-release\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
+"D:\UE_pro\AsrPlugin\Plugins\asr\Intermediate\Build\Win64\UE4Editor\Development\asr\Module.asr.cpp.obj"
+"D:\UE_pro\AsrPlugin\Plugins\asr\Intermediate\Build\Win64\UE4Editor\Development\asr\Module.asr.gen.cpp.obj"
+"D:\harix-ue4-engine\UnrealEngine-4.23.0-release\Engine\Intermediate\Build\Win64\UE4Editor\Development\Default.rc2.res"
+/OUT:"D:\UE_pro\AsrPlugin\Plugins\asr\Intermediate\Build\Win64\UE4Editor\Development\asr\UE4Editor-asr-0002.lib"
+/INCLUDE:IMPLEMENT_MODULE_asr

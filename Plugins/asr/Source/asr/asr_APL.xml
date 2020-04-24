@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--HarixSDK plugin additions-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- init section is always evaluated once per architecture -->
+  <trace enable="true"/>
+  <init>
+    <log text="asr APL init"/>
+  </init>
+
+  <androidManifestUpdates>
+<!--    <addElements tag="application">-->
+<!--      <activity android:name="com.ChengduWonderVision.BlockMaster.wxapi.WXEntryActivity"-->
+<!--      android:launchMode="singleTop"-->
+<!--      android:exported="true"/>-->
+<!--    </addElements>-->
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    
+  </androidManifestUpdates>
+
+  <!-- optional additions to proguard -->
+  <proguardAdditions>
+    <insert>
+    </insert>
+  </proguardAdditions>
+
+  <resourceCopies>
+    <!-- Copy the generated resource file to be packaged -->
+    <copyFile src="$S(PluginDir)/../../lib/Android/asr-debug.aar" dst="$S(BuildDir)/libs/asr-debug.aar" />
+  </resourceCopies>
+
+  <buildGradleAdditions>
+    <insert>
+      dependencies{
+      implementation files('src/main/libs/asr-debug.aar')
+      }
+    </insert>
+  </buildGradleAdditions>
+
+  <!-- optional additions to the GameActivity imports in GameActivity.java -->
+  <gameActivityImportAdditions>
+    <insert>
+      import com.cloudminds.cloudia.AsrManager;
+      import com.cloudminds.cloudia.CloudiaAsrListener;
+    </insert>
+  </gameActivityImportAdditions>
+
+
+  <!-- optional additions to the GameActivity class in GameActivity.java -->
+  <gameActivityClassAdditions>
+    <insert>
+      <![CDATA[
+    private static final String TAG = "milton";
+    private AsrManager asrManager;
+    private CloudiaAsrListener mCloudiaAsrListener = new CloudiaAsrListener() {
+
+        @Override
+        public void onEndOfSpeech() {
+
+        }
+
+        @Override
+        public void onResult(String result) {
+            Log.debug("milton onResult result = " + result);
+            onASRResult(result);
+        }
+
+        @Override
+        public void onError(String errorDescription) {
+           Log.debug("milton onError errorDescription = " + errorDescription);
+        }
+    };
+    public void startRecognizing() {
+       asrManager.startRecognizing();
+    }
+    
+    public void stopRecognizing() {
+       asrManager.stopRecognizing();
+    }
+    
+    public void setRecognizeType(int recognizeType) {
+       asrManager.setRecognizeType(recognizeType);
+    }
+    
+    public void setEngineType(int engineType) {
+       asrManager.setEngineType(engineType);
+    }
+    
+    public void audioWrite(byte[] data) {
+        asrManager.audioWrite(data);
+    }
+    
+    private native void onASRResult(String result);
+    ]]>
+    </insert>
+  </gameActivityClassAdditions>
+
+  <!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
+  <gameActivityReadMetadataAdditions>
+    <insert>
+
+    </insert>
+  </gameActivityReadMetadataAdditions>
+
+  <!-- optional additions to GameActivity onCreate in GameActivity.java -->
+  <gameActivityOnCreateAdditions>
+    <insert>
+      <![CDATA[
+    Log.debug("milton test asr  Init Begin");
+    asrManager = AsrManager.getInstance();
+    asrManager.init(getApplicationContext(),"5e9e9cdd");
+    asrManager.setResultListener(mCloudiaAsrListener);
+  ]]>
+    </insert>
+  </gameActivityOnCreateAdditions>
+
+  <!-- optional additions to GameActivity onDestroy in GameActivity.java -->
+  <gameActivityOnDestroyAdditions>
+    <insert>
+
+    </insert>
+  </gameActivityOnDestroyAdditions>
+
+
+  <!-- optional additions to GameActivity onStart in GameActivity.java -->
+  <gameActivityOnStartAdditions>
+    <insert>
+
+    </insert>
+  </gameActivityOnStartAdditions>
+
+  <!-- optional additions to GameActivity onStop in GameActivity.java -->
+  <gameActivityOnStopAdditions>
+    <insert>
+
+    </insert>
+  </gameActivityOnStopAdditions>
+
+
+  <!-- optional additions to GameActivity onPause in GameActivity.java  -->
+  <gameActivityOnPauseAdditions>
+    <insert>
+    </insert>
+  </gameActivityOnPauseAdditions>
+
+
+  <!-- optional additions to GameActivity onResume in GameActivity.java -->
+  <gameActivityOnResumeAdditions>
+    <insert>
+    </insert>
+  </gameActivityOnResumeAdditions>
+
+
+  <!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
+  <gameActivityOnActivityResultAdditions>
+    <insert>
+    </insert>
+  </gameActivityOnActivityResultAdditions>
+
+
+  <!-- optional libraries to load in GameActivity.java before libUE4.so -->
+  <soLoadLibrary>
+    <!-- need this if plugin enabled and supported architecture, even if not packaged for GearVR -->
+    <!--  <if condition="bSupported">
+      <true>
+        <loadLibrary name="vrapi" failmsg="GearVR library not loaded and required!" />
+      </true>
+    </if> -->
+  </soLoadLibrary>
+</root>
