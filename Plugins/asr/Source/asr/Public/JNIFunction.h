@@ -20,5 +20,6 @@ public:
 	static void SetRecognizeType(const int recognizeType);
 	static void SetEngineType(const int engineType);
 	static void AudioWrite(const TArray<uint8> &data, const int len);
+	static void Speak(const FString& text);
 };
 #endif

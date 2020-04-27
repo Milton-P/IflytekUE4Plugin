@@ -60,6 +60,13 @@ void AtestActor::SetEngineType(const int engineType)
 #endif
 }
 
+void AtestActor::Speak(const FString & text)
+{
+#if PLATFORM_ANDROID
+	JNIFunction::Speak(text);
+#endif
+}
+
 void AtestActor::OnRecive(const FString &msg)
 {
 	UE_LOG(LogTemp, Warning, TEXT("milton testActor OnRecive msg"));

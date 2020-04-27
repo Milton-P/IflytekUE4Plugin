@@ -53,6 +53,7 @@
     <insert>
       import com.cloudminds.cloudia.AsrManager;
       import com.cloudminds.cloudia.CloudiaAsrListener;
+      import com.cloudminds.cloudia.TtsManager;
     </insert>
   </gameActivityImportAdditions>
 
@@ -63,6 +64,7 @@
       <![CDATA[
     private static final String TAG = "milton";
     private AsrManager asrManager;
+    private TtsManager ttsManager;
     private CloudiaAsrListener mCloudiaAsrListener = new CloudiaAsrListener() {
 
         @Override
@@ -74,6 +76,7 @@
         public void onResult(String result) {
             Log.debug("milton onResult result = " + result);
             onASRResult(result);
+            speak(result);
         }
 
         @Override
@@ -100,7 +103,9 @@
     public void audioWrite(byte[] data) {
         asrManager.audioWrite(data);
     }
-    
+    public void speak(String text) {
+        ttsManager.speak(text);
+    }
     private native void onASRResult(String result);
     ]]>
     </insert>
@@ -121,6 +126,8 @@
     asrManager = AsrManager.getInstance();
     asrManager.init(getApplicationContext(),"5e9e9cdd");
     asrManager.setResultListener(mCloudiaAsrListener);
+    ttsManager = TtsManager.getInstance();
+    ttsManager.init(getApplicationContext());
   ]]>
     </insert>
   </gameActivityOnCreateAdditions>

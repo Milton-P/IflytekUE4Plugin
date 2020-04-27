@@ -65,6 +65,16 @@ void JNIFunction::AudioWrite(const TArray<uint8> &data, const int len)
 	}
 }
 
+void JNIFunction::Speak(const FString & text)
+{
+	if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
+	{
+		static jmethodID MethonId = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "speak", "(Ljava/lang/String;)V", false);
+		jstring jtext = Env->NewStringUTF(TCHAR_TO_UTF8(*text));
+		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, MethonId, jtext);
+	}
+}
+
 extern "C" void Java_com_epicgames_ue4_GameActivity_onASRResult(JNIEnv* jenv, jobject thiz, jstring content)
 {
 	UE_LOG(LogAndroid, Warning, TEXT("ue milton onResult\n"));

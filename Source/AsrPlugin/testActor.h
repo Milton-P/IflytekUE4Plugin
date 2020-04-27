@@ -35,6 +35,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "testActor")
 	void SetEngineType(const int engineType);
 
+	UFUNCTION(BlueprintCallable, Category = "testActor")
+	void Speak(const FString& text);
+
 	void OnRecive(const FString &msg);
 
 	UFUNCTION(BlueprintImplementableEvent)
